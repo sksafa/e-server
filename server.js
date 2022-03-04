@@ -22,7 +22,16 @@
         console.log("server is runnig" ,port);
     })
 
-    
+//unhandel reaction
+
+process.on("unhandledRejection", (err)=>{
+  console.log(`shutting down server for ${err.message}`);
+  console.log(`shutting down server due to Unhandled promise rejection`);
+  server.close(()=>{
+    process.exit(1)
+  });
+});
+
 
 
 
