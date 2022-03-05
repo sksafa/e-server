@@ -1,6 +1,13 @@
 
     const app = require('./app');
     require('dotenv').config()
+
+
+    process.on("uncaughtException",(err)=>{
+      console.log(`Error: ${err.message}`)
+      console.log(`Shuting down the server for uncaughtException`)
+    })
+
     // const mongoose = require('mongoose');
 
     // const URI = process.env.DB_URL;
