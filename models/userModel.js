@@ -42,7 +42,7 @@ const userSchema = new mongoose.Schema({
     resetPasswordTime: Date,
 
 })
-// generate hashed password
+//generate hashed password
 userSchema.pre("save", async function(next){
     if(!this.isModified("password")){
         next();
@@ -50,14 +50,14 @@ userSchema.pre("save", async function(next){
     this.password = await bcrypt.hash(this.password,10);
 });
 
-// code for me to another 
+//code for me to another 
 userSchema.methods.getJwtToken = function(){
     return jwt.sign({id:this._id},process.env.JWT_SECRET_KEY,{
         expiresIn: process.env.JWT_EXPIRES
     });
 };
 
-// login password
+//login password
 userSchema.methods.comparePassword = async function(enteredPassword){
     return await bcrypt.compare(enteredPassword, this.password);
 }
